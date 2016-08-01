@@ -6,10 +6,10 @@ grammar IfDef;
 blockList
 : block*
 ;
-//endif, else, elif ´Â Ç×»ó if ifdef µî°ú Â¦ÀÌ ¸Â¾Æ¾ß ÇÑ´Ù.
-//ÄÄÆÄÀÏÀÌ Àß µÇ´Â ÆÄÀÏÀÌ¶ó´Â °¡Á¤ÇÏ¿¡ ÅØ½ºÆ® ºĞ¼®(Á¤Àû ºĞ¼®)À» ÇÑ´Ù.
-// µû¶ó¼­, ´ÙÀ½ 'block' rule ¿¡¼­´Â endif, else, elif ´Â simpleIfSet ÀÌ³ª zeroIfSet // ¿¡ Æ÷ÇÔµÇ°í
-// simpleIfSet°ú zeroIfSetÀº °¢°¢ÀÇ setList¿¡ Æ÷ÇÔµÇ¹Ç·Î Á¦°ÅÇÏ¿´´Ù.
+//endif, else, elif ëŠ” í•­ìƒ if ifdef ë“±ê³¼ ì§ì´ ë§ì•„ì•¼ í•œë‹¤.
+//ì»´íŒŒì¼ì´ ì˜ ë˜ëŠ” íŒŒì¼ì´ë¼ëŠ” ê°€ì •í•˜ì— í…ìŠ¤íŠ¸ ë¶„ì„(ì •ì  ë¶„ì„)ì„ í•œë‹¤.
+// ë”°ë¼ì„œ, ë‹¤ìŒ 'block' rule ì—ì„œëŠ” endif, else, elif ëŠ” simpleIfSet ì´ë‚˜ zeroIfSet // ì— í¬í•¨ë˜ê³ 
+// simpleIfSetê³¼ zeroIfSetì€ ê°ê°ì˜ setListì— í¬í•¨ë˜ë¯€ë¡œ ì œê±°í•˜ì˜€ë‹¤.
 block
 : zeroIfSetList
 | simpleIfSetList
@@ -22,7 +22,7 @@ zeroIfSetList
 | zeroIfSet zeroIfSetList
 ;
 
-//elif´Â ¿©·¯ ¹ø ³ª¿Ã ¼ö ÀÖÁö¸¸, else´Â ÇÑ if set¿¡ ¿©·¯ ¹ø ³ª¿Ã ¼ö ¾ø´Ù.
+//elifëŠ” ì—¬ëŸ¬ ë²ˆ ë‚˜ì˜¬ ìˆ˜ ìˆì§€ë§Œ, elseëŠ” í•œ if setì— ì—¬ëŸ¬ ë²ˆ ë‚˜ì˜¬ ìˆ˜ ì—†ë‹¤.
 zeroIfSet
 :  zeroIf elif* else? endIf
 | zeroIf (simpleIfSetList | zeroIfSetList)? elifList? else? (simpleIfSetList | zeroIfSetList)? endIf
@@ -73,10 +73,10 @@ unknown
 //lexer rule
 
 
-//cf. #if ¸¸ ÇÑÁÙ¿¡ ½áÀÖ°í newline À¸·Î Ã³¸®µÈ´Ù¸é, #if 0 ¿Í °°Àº È¿°úÀÌ´Ù.
+//cf. #if ë§Œ í•œì¤„ì— ì¨ìˆê³  newline ìœ¼ë¡œ ì²˜ë¦¬ëœë‹¤ë©´, #if 0 ì™€ ê°™ì€ íš¨ê³¼ì´ë‹¤.
 //#if
 //#if 0
-//µû¶ó¼­, [0] ÀÌ ¾Æ´Ï¶ó, [0]? À¸·Î Ç¥ÇöÇÏ¿´´Ù.
+//ë”°ë¼ì„œ, [0] ì´ ì•„ë‹ˆë¼, [0]? ìœ¼ë¡œ í‘œí˜„í•˜ì˜€ë‹¤.
 ZeroIf : '#' Whitespace? 'if' Whitespace [0]? Whitespace? Newline+ 
 | '#' Whitespace? 'if' Whitespace [0] EOF
 ;
