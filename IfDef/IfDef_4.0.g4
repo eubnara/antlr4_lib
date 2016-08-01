@@ -1,8 +1,8 @@
 /*
-'EndIf' Lexer rule ¿¡¼­ ¸¶Áö¸·¿¡ EOF·Î ³¡³ª´Â °Í ¾Õ¿¡ Whitespace? Ãß°¡ÇÔ. ÀÌÀü ¹öÀü¿¡¼­ °í·ÁÇÏÁö ¸øÇÑ case.
-³ª¸ÓÁö lexer rule ¿¡µµ µ¿ÀÏÇÏ°Ô Ãß°¡ÇÔ.
+'EndIf' Lexer rule ì—ì„œ ë§ˆì§€ë§‰ì— EOFë¡œ ëë‚˜ëŠ” ê²ƒ ì•ì— Whitespace? ì¶”ê°€í•¨. ì´ì „ ë²„ì „ì—ì„œ ê³ ë ¤í•˜ì§€ ëª»í•œ case.
+ë‚˜ë¨¸ì§€ lexer rule ì—ë„ ë™ì¼í•˜ê²Œ ì¶”ê°€í•¨.
 
-#endif µîÀÇ lexer rule ¿¡¼­ °°Àº ¶óÀÎ¿¡ ÁÖ¼®Ã³¸®°¡ ³¢¾îÀÖÀ» ¶§ ¹ö±× Ã³¸®.
+#endif ë“±ì˜ lexer rule ì—ì„œ ê°™ì€ ë¼ì¸ì— ì£¼ì„ì²˜ë¦¬ê°€ ë¼ì–´ìˆì„ ë•Œ ë²„ê·¸ ì²˜ë¦¬.
 */
 
 grammar IfDef;
@@ -13,10 +13,10 @@ grammar IfDef;
 blockList
 : block+
 ;
-//endif, elseDef, elifDef ´Â Ç×»ó if ifdef µî°ú Â¦ÀÌ ¸Â¾Æ¾ß ÇÑ´Ù.
-//ÄÄÆÄÀÏÀÌ Àß µÇ´Â ÆÄÀÏÀÌ¶ó´Â °¡Á¤ÇÏ¿¡ ÅØ½ºÆ® ºĞ¼®(Á¤Àû ºĞ¼®)À» ÇÑ´Ù.
-// µû¶ó¼­, ´ÙÀ½ 'block' rule ¿¡¼­´Â endif, elseDef, elifDef ´Â simpleIfDefSet ÀÌ³ª zeroIfDefSet // ¿¡ Æ÷ÇÔµÇ°í
-// simpleIfDefSet°ú zeroIfDefSetÀº °¢°¢ÀÇ setList¿¡ Æ÷ÇÔµÇ¹Ç·Î Á¦°ÅÇÏ¿´´Ù.
+//endif, elseDef, elifDef ëŠ” í•­ìƒ if ifdef ë“±ê³¼ ì§ì´ ë§ì•„ì•¼ í•œë‹¤.
+//ì»´íŒŒì¼ì´ ì˜ ë˜ëŠ” íŒŒì¼ì´ë¼ëŠ” ê°€ì •í•˜ì— í…ìŠ¤íŠ¸ ë¶„ì„(ì •ì  ë¶„ì„)ì„ í•œë‹¤.
+// ë”°ë¼ì„œ, ë‹¤ìŒ 'block' rule ì—ì„œëŠ” endif, elseDef, elifDef ëŠ” simpleIfDefSet ì´ë‚˜ zeroIfDefSet // ì— í¬í•¨ë˜ê³ 
+// simpleIfDefSetê³¼ zeroIfDefSetì€ ê°ê°ì˜ setListì— í¬í•¨ë˜ë¯€ë¡œ ì œê±°í•˜ì˜€ë‹¤.
 block
 : zeroIfDefSetList
 | simpleIfDefSetList
@@ -29,9 +29,9 @@ zeroIfDefSetList
 | zeroIfDefSet zeroIfDefSetList
 ;
 
-//elifDef´Â ¿©·¯ ¹ø ³ª¿Ã ¼ö ÀÖÁö¸¸, elseDef´Â ÇÑ if set¿¡ ¿©·¯ ¹ø ³ª¿Ã ¼ö ¾ø´Ù.
+//elifDefëŠ” ì—¬ëŸ¬ ë²ˆ ë‚˜ì˜¬ ìˆ˜ ìˆì§€ë§Œ, elseDefëŠ” í•œ if setì— ì—¬ëŸ¬ ë²ˆ ë‚˜ì˜¬ ìˆ˜ ì—†ë‹¤.
 //(simpleIfDefSetList | zeroIfDefSetList)? --> (simpleIfDefSetList | zeroIfDefSetList)* 
-// simpleDefSetList ¿Í zeroIfDefSetList°¡ °°ÀÌ ÀÖ´Â °æ¿ì ¹­¾îÁÖ±â À§ÇØ¼­
+// simpleDefSetList ì™€ zeroIfDefSetListê°€ ê°™ì´ ìˆëŠ” ê²½ìš° ë¬¶ì–´ì£¼ê¸° ìœ„í•´ì„œ
 zeroIfDefSet
 :  zeroIfDef elifDef* elseDef? endIf
 | zeroIfDef elifDefList? (simpleIfDefSetList | zeroIfDefSetList)* elifDefList? elseDef? (simpleIfDefSetList| zeroIfDefSetList)* endIf
@@ -43,14 +43,14 @@ simpleIfDefSetList
 ;
 
 //(simpleIfDefSetList | zeroIfDefSetList)? --> (simpleIfDefSetList | zeroIfDefSetList)*
-//¼³¸íÀº zeorIfDefSet¿Í µ¿ÀÏ
+//ì„¤ëª…ì€ zeorIfDefSetì™€ ë™ì¼
 simpleIfDefSet
 :  simpleIfDef elifDef* elseDef? endIf
 | simpleIfDef elifDefList? (simpleIfDefSetList| zeroIfDefSetList)* elifDefList? elseDef? (simpleIfDefSetList| zeroIfDefSetList)? endIf
 ;
 
 //elifDef simpleIfDefSet* zeroIfDefSet*  --> elifDef (simpleIfDefSet | zeroIfDefSet)*
-//ÀüÀÚ´Â zeroIfDefSet°¡ ¸ÕÀú ³ª¿Â °æ¿ì¸¦ Ã³¸®ÇÏÁú ¸øÇÔ
+//ì „ìëŠ” zeroIfDefSetê°€ ë¨¼ì € ë‚˜ì˜¨ ê²½ìš°ë¥¼ ì²˜ë¦¬í•˜ì§ˆ ëª»í•¨
 elifDefList
 : elifDef
 | elifDef (simpleIfDefSet | zeroIfDefSet)*
